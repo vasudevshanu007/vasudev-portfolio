@@ -54,12 +54,15 @@ export default function Contact() {
         body:    JSON.stringify(form),
       });
 
-      if (!res.ok) throw new Error('Server error');
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Server error');
+      }
 
       toast.success('Message sent! I\'ll get back to you soon.', { id: toastId });
       setForm(INITIAL_FORM);
-    } catch {
-      toast.error('Failed to send. Please email me directly.', { id: toastId });
+    } catch (err) {
+      toast.error(err.message || 'Failed to send. Please email me directly.', { id: toastId });
     } finally {
       setSubmit(false);
     }

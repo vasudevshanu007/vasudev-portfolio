@@ -5,8 +5,8 @@ function validate({ name, email, message }) {
     return 'Name must be at least 2 characters.';
   if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     return 'A valid email address is required.';
-  if (!message || typeof message !== 'string' || message.trim().length < 10)
-    return 'Message must be at least 10 characters.';
+  if (!message || typeof message !== 'string' || !message.trim())
+    return 'Please enter a message.';
   if (name.length > 100 || email.length > 200 || message.length > 2000)
     return 'Input exceeds maximum length.';
   return null;
