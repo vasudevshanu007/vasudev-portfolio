@@ -167,8 +167,8 @@ export const projects = [
     image: '/img/portfolioImage.png',
     tech: ['React', 'Tailwind CSS', 'Framer Motion', 'Node.js'],
     category: 'Web',
-    liveUrl: '#',
-    githubUrl: '',
+    liveUrl: 'https://vasudev-portfolio-blush.vercel.app',
+    githubUrl: 'https://github.com/vasudevshanu007/vasudev-portfolio',
     featured: false,
   },
 ];

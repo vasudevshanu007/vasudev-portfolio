@@ -196,12 +196,12 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-dark-800 shadow-2xl bg-gray-100 dark:bg-dark-600"
+              className="relative w-52 h-64 sm:w-64 sm:h-80 rounded-full overflow-hidden border-4 border-dark-800 shadow-2xl"
             >
               <img
                 src="/img/vasudev.jpg"
                 alt="Vasudev Kumar"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover object-top"
                 loading="eager"
               />
             </motion.div>
