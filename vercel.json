@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "vasudev-portfolio",
+  "buildCommand": "cd portfolio-frontend && npm install && npm run build",
+  "outputDirectory": "portfolio-frontend/dist",
+  "installCommand": "cd portfolio-frontend && npm install",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
