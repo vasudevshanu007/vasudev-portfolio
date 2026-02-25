@@ -155,7 +155,7 @@ export const projects = [
     image: '/img/counter.png',
     tech: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
     category: 'Web',
-    liveUrl: 'https://deft-entremet-f45efe.netlify.app',
+    liveUrl: 'https://word-counter-main-zeta.vercel.app',
     githubUrl: '',
     featured: false,
   },
