@@ -77,14 +77,14 @@ export default function About() {
             transition={{ duration: 0.7 }}
             className="flex-shrink-0 w-full lg:w-80 flex flex-col items-center lg:items-start gap-6"
           >
-            <div className="relative w-64 h-64 lg:w-72 lg:h-72 mx-auto lg:mx-0">
+            <div className="relative w-56 h-80 lg:w-64 lg:h-96 mx-auto lg:mx-0">
               {/* Decorative border */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-accent p-0.5">
-                <div className="w-full h-full rounded-2xl overflow-hidden bg-dark-700">
+                <div className="w-full h-full rounded-2xl overflow-hidden bg-white dark:bg-dark-700">
                   <img
                     src="/img/vasudev.jpg"
                     alt="Vasudev Kumar"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
