@@ -8,10 +8,8 @@ import {
 import { personalInfo } from '../data/index.js';
 
 // Dev:  Vite proxy  → /api/send-email  → localhost:5000/send-email
-// Prod: VITE_API_BASE (Render URL)    → https://xxx.onrender.com/send-email
-const API_URL = import.meta.env.VITE_API_BASE
-  ? `${import.meta.env.VITE_API_BASE}/send-email`
-  : '/api/send-email';
+// Prod: Vercel serverless function at /api/send-email (same domain, no cold start)
+const API_URL = '/api/send-email';
 
 const INITIAL_FORM = { name: '', phone: '', email: '', message: '' };
 
