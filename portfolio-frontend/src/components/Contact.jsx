@@ -73,7 +73,7 @@ export default function Contact() {
     'w-full pl-10 pr-4 py-3 rounded-xl text-sm bg-white dark:bg-dark-600 border border-gray-200 dark:border-white/10 text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-primary dark:focus:border-primary transition-colors duration-200';
 
   return (
-    <section id="contact" className="section-padding bg-white dark:bg-dark-800">
+    <section id="contact" className="section-padding bg-white/90 dark:bg-dark-800/80">
       <div className="container-custom">
         {/* Header */}
         <motion.div

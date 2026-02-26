@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FiBriefcase, FiMapPin, FiCalendar } from 'react-icons/fi';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { FiBriefcase, FiCalendar } from 'react-icons/fi';
 import { experiences } from '../data/index.js';
 
 const sectionVar = {
@@ -13,8 +13,11 @@ const textVar = {
 };
 
 export default function Experience() {
+  const timelineRef = useRef(null);
+  const lineInView  = useInView(timelineRef, { once: true, margin: '-80px' });
+
   return (
-    <section id="experience" className="section-padding bg-white dark:bg-dark-800">
+    <section id="experience" className="section-padding bg-white/90 dark:bg-dark-800/80">
       <div className="container-custom">
         {/* Header */}
         <motion.div
@@ -36,9 +39,15 @@ export default function Experience() {
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative max-w-3xl mx-auto">
-          {/* Vertical line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-accent/60 to-transparent -translate-x-1/2" />
+        <div ref={timelineRef} className="relative max-w-3xl mx-auto">
+          {/* Animated vertical line */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={lineInView ? { scaleY: 1 } : {}}
+            transition={{ duration: 1.2, ease: 'easeOut' }}
+            style={{ originY: 0 }}
+            className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-accent/60 to-transparent -translate-x-1/2"
+          />
 
           {experiences.map((exp, index) => {
             const isLeft = index % 2 === 0;
@@ -55,11 +64,16 @@ export default function Experience() {
                 } flex-row gap-8`}
               >
                 {/* Timeline dot */}
-                <div
-                  className={`absolute left-6 md:left-1/2 -translate-x-1/2 top-5 z-10 flex items-center justify-center
-                    w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/25`}
-                >
-                  <FiBriefcase size={16} className="text-white" />
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-5 z-10">
+                  {/* Pulsing ring */}
+                  <motion.div
+                    animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
+                    transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut', delay: index * 0.4 }}
+                    className="absolute inset-0 rounded-full bg-primary/30 pointer-events-none"
+                  />
+                  <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/25 flex items-center justify-center">
+                    <FiBriefcase size={16} className="text-white" />
+                  </div>
                 </div>
 
                 {/* Spacer for desktop alternating layout */}

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiSearch, FiStar } from 'react-icons/fi';
 import { projects } from '../data/index.js';
 
@@ -18,12 +18,31 @@ const cardVar = {
 function ProjectCard({ project }) {
   const [hovered, setHovered] = useState(false);
 
+  // 3D tilt tracking
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(mouseY, [-80, 80], [8, -8]), { stiffness: 400, damping: 28 });
+  const rotateY = useSpring(useTransform(mouseX, [-80, 80], [-8, 8]), { stiffness: 400, damping: 28 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - (rect.left + rect.width / 2));
+    mouseY.set(e.clientY - (rect.top + rect.height / 2));
+  };
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+    setHovered(false);
+  };
+
   return (
     <motion.article
       variants={cardVar}
       layout
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
+      style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={handleMouseLeave}
       className="glass-card overflow-hidden group flex flex-col hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300"
     >
       {/* Image */}
@@ -162,6 +181,17 @@ export default function Projects() {
   const [category, setCategory] = useState('All');
   const [search, setSearch]     = useState('');
 
+  const orbX = useMotionValue(0);
+  const orbY = useMotionValue(0);
+  const smoothX = useSpring(orbX, { stiffness: 60, damping: 18 });
+  const smoothY = useSpring(orbY, { stiffness: 60, damping: 18 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    orbX.set(e.clientX - rect.left);
+    orbY.set(e.clientY - rect.top);
+  };
+
   const filtered = useMemo(() => {
     return projects.filter((p) => {
       const matchCat    = category === 'All' || p.category === category;
@@ -172,7 +202,23 @@ export default function Projects() {
   }, [category, search]);
 
   return (
-    <section id="projects" className="section-padding bg-gray-50 dark:bg-dark-700">
+    <section
+      id="projects"
+      className="section-padding bg-gray-50/90 dark:bg-dark-700/80 relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Mouse-tracking glow orb */}
+      <motion.div
+        aria-hidden
+        className="absolute pointer-events-none rounded-full"
+        style={{
+          width: 600, height: 600,
+          x: smoothX, y: smoothY,
+          translateX: '-50%', translateY: '-50%',
+          background: 'radial-gradient(circle, rgba(221,143,231,0.10) 0%, rgba(240,116,132,0.05) 40%, transparent 70%)',
+          filter: 'blur(50px)',
+        }}
+      />
       <div className="container-custom">
         {/* Header */}
         <motion.div
@@ -250,6 +296,7 @@ export default function Projects() {
             whileInView="visible"
             viewport={{ once: true, margin: '-30px' }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            style={{ perspective: '1200px' }}
           >
             <AnimatePresence mode="popLayout">
               {filtered.map((p) => (

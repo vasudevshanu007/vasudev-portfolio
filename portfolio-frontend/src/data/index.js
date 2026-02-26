@@ -143,7 +143,7 @@ export const projects = [
     image: '/img/IPL.jpg',
     tech: ['Python', 'Streamlit', 'Pandas', 'NumPy', 'XGBoost', 'Random Forest'],
     category: 'ML/AI',
-    liveUrl: '',
+    liveUrl: 'https://ipl-team-batmans-5vg6q6avriyppkuq2btxmq.streamlit.app/',
     githubUrl: 'https://github.com/vasudevshanu007/IPL-win-predictor-',
     featured: true,
   },

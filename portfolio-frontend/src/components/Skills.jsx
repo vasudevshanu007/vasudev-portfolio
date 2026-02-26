@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import {
   SiReact, SiNodedotjs, SiMongodb, SiExpress, SiJavascript,
   SiPython, SiCplusplus, SiGit, SiTailwindcss, SiBootstrap,
@@ -71,9 +71,61 @@ const itemVar = {
   visible: { opacity: 1, scale: 1,    y: 0,  transition: { duration: 0.45 } },
 };
 
+// Floating decorative blobs
+const BLOBS = [
+  { w: 180, h: 180, top: '8%',  left: '5%',  color: '#f07484', delay: 0,   dur: 7  },
+  { w: 120, h: 120, top: '60%', left: '90%', color: '#dd8fe7', delay: 1.5, dur: 9  },
+  { w: 80,  h: 80,  top: '30%', left: '80%', color: '#f07484', delay: 0.8, dur: 6  },
+  { w: 60,  h: 60,  top: '80%', left: '15%', color: '#dd8fe7', delay: 2,   dur: 8  },
+];
+
 export default function Skills() {
+  const orbX = useMotionValue(0);
+  const orbY = useMotionValue(0);
+  const smoothX = useSpring(orbX, { stiffness: 60, damping: 18 });
+  const smoothY = useSpring(orbY, { stiffness: 60, damping: 18 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    orbX.set(e.clientX - rect.left);
+    orbY.set(e.clientY - rect.top);
+  };
+
   return (
-    <section id="skills" className="section-padding bg-gray-50 dark:bg-dark-700">
+    <section
+      id="skills"
+      className="section-padding bg-gray-50/90 dark:bg-dark-700/80 relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Mouse-tracking glow orb */}
+      <motion.div
+        aria-hidden
+        className="absolute pointer-events-none rounded-full"
+        style={{
+          width: 500, height: 500,
+          x: smoothX, y: smoothY,
+          translateX: '-50%', translateY: '-50%',
+          background: 'radial-gradient(circle, rgba(240,116,132,0.12) 0%, rgba(221,143,231,0.06) 40%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+      />
+      {/* Floating blobs */}
+      {BLOBS.map((b, i) => (
+        <motion.div
+          key={i}
+          aria-hidden
+          animate={{ y: [0, -22, 0], x: [0, 10, 0] }}
+          transition={{ duration: b.dur, repeat: Infinity, ease: 'easeInOut', delay: b.delay }}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: b.w, height: b.h,
+            top: b.top, left: b.left,
+            background: b.color,
+            opacity: 0.04,
+            filter: 'blur(40px)',
+          }}
+        />
+      ))}
       <div className="container-custom">
         {/* Header */}
         <motion.div

@@ -16,6 +16,7 @@ export default {
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
+        playfair: ['"Playfair Display"', 'serif'],
       },
       animation: {
         float: 'float 4s ease-in-out infinite',

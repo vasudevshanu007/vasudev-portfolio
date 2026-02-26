@@ -28,7 +28,7 @@ export default function Footer() {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <footer className="bg-dark-900 dark:bg-dark-900 border-t border-white/5">
+    <footer className="bg-dark-900/90 border-t border-white/5">
       <div className="container-custom px-6 py-12">
         <div className="grid sm:grid-cols-3 gap-8 mb-10">
           {/* Brand */}

@@ -43,11 +43,35 @@ const itemVar = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
+// Floating decorative blobs
+const BLOBS = [
+  { w: 200, h: 200, top: '5%',  left: '70%', color: '#dd8fe7', delay: 0,   dur: 8  },
+  { w: 100, h: 100, top: '70%', left: '2%',  color: '#f07484', delay: 1.2, dur: 7  },
+  { w: 70,  h: 70,  top: '40%', left: '92%', color: '#f07484', delay: 0.5, dur: 6  },
+];
+
 export default function About() {
   const [activeTab, setActiveTab] = useState('Skills');
 
   return (
-    <section id="about" className="section-padding bg-white dark:bg-dark-800">
+    <section id="about" className="section-padding bg-white/90 dark:bg-dark-800/80 relative overflow-hidden">
+      {/* Floating blobs */}
+      {BLOBS.map((b, i) => (
+        <motion.div
+          key={i}
+          aria-hidden
+          animate={{ y: [0, -18, 0], x: [0, 12, 0] }}
+          transition={{ duration: b.dur, repeat: Infinity, ease: 'easeInOut', delay: b.delay }}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: b.w, height: b.h,
+            top: b.top, left: b.left,
+            background: b.color,
+            opacity: 0.05,
+            filter: 'blur(45px)',
+          }}
+        />
+      ))}
       <div className="container-custom">
         {/* Header */}
         <motion.div
