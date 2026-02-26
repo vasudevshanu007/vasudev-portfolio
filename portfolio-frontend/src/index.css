@@ -21,8 +21,8 @@
     cursor: none;
   }
 
-  /* Restore default cursor on touch devices — custom cursor only for pointer devices */
-  @media (hover: none) {
+  /* Restore default cursor on touch/coarse pointer devices — custom cursor only for mouse */
+  @media (pointer: coarse) {
     body, a, button, input, textarea, select, [role="button"] {
       cursor: auto;
     }

@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export default function Cursor() {
   const [hovering, setHovering] = useState(false);
+  const [isPointer, setIsPointer] = useState(false);
 
   const rawX = useMotionValue(-100);
   const rawY = useMotionValue(-100);
@@ -20,6 +21,11 @@ export default function Cursor() {
   const haloY = useTransform(springY, v => v - 32);
 
   useEffect(() => {
+    // Only enable custom cursor on mouse/trackpad devices (not touch screens)
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
+    setIsPointer(true);
+
     const onMove  = (e) => { rawX.set(e.clientX); rawY.set(e.clientY); };
     const onEnter = (e) => { if (e.target.closest('a, button')) setHovering(true); };
     const onLeave = () => setHovering(false);
@@ -34,6 +40,9 @@ export default function Cursor() {
       document.removeEventListener('mouseout',  onLeave);
     };
   }, [rawX, rawY]);
+
+  // Don't render on touch/mobile devices
+  if (!isPointer) return null;
 
   return (
     <>
