@@ -20,7 +20,7 @@ export const personalInfo = {
 // ─── Stats ───────────────────────────────────────────────────────────────────
 export const stats = [
   { label: 'DSA Problems', value: '500+' },
-  { label: 'Projects Built', value: '5+' },
+  { label: 'Projects Built', value: '7+' },
   { label: 'Codeforces Rating', value: '1494' },
   { label: 'CGPA', value: '8.7' },
 ];
@@ -158,6 +158,30 @@ export const projects = [
     liveUrl: 'https://word-counter-main-zeta.vercel.app',
     githubUrl: '',
     featured: false,
+  },
+  {
+    id: 6,
+    title: 'CricINDIA — Cricket Franchise Management',
+    description:
+      "India's Premier Cricket Franchise Management Platform. Manage events, schedule practice sessions, track player performance, and view coach details — all in a sleek dark-themed dashboard with secure login.",
+    image: '/img/cricindia.png.png',
+    tech: ['React.js', 'JavaScript', 'CSS', 'Node.js'],
+    category: 'Web',
+    liveUrl: 'https://cric-ind.vercel.app',
+    githubUrl: 'https://github.com/vasudevshanu007/cricket-management-system',
+    featured: true,
+  },
+  {
+    id: 7,
+    title: 'Meeting Room Booking',
+    description:
+      'A full-stack room booking system to schedule and manage meeting room reservations. Features real-time availability, booking management, and a clean dashboard interface.',
+    image: '/img/bookaroom.png',
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
+    category: 'Web',
+    liveUrl: 'https://bookaroom.ozi.in',
+    githubUrl: 'https://github.com/vasudevkumarozi/book-a-room',
+    featured: true,
   },
   {
     id: 5,
