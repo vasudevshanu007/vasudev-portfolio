@@ -116,11 +116,11 @@ export const projects = [
     title: 'Hospital Management System',
     description:
       'Full-stack hospital management system with patient registration, doctor scheduling, appointments, and JWT-based authentication. Features real-time data and a clean admin dashboard.',
-    image: '/img/download.jfif',
+    image: '/img/hospital.png',
     tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Bootstrap'],
     category: 'Web',
-    liveUrl: '',
-    githubUrl: 'https://github.com/vasudevshanu007/hospital-management-system',
+    liveUrl: 'https://hospital-management-system-one-nu.vercel.app/',
+    githubUrl: 'https://github.com/vasudevshanu007/Hospital-Management-System',
     featured: true,
   },
   {
